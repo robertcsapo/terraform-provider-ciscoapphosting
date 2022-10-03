@@ -33,9 +33,9 @@ archives:
 - format: zip
   name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}'
 checksum:
-  #extra_files:
-  #  - glob: 'terraform-registry-manifest.json'
-  #    name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
+  extra_files:
+    - glob: 'terraform-registry-manifest.json'
+      name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
   name_template: '{{ .ProjectName }}_{{ .Version }}_SHA256SUMS'
   algorithm: sha256
 signs:
@@ -45,16 +45,16 @@ signs:
       # need to pass the batch flag to indicate its not interactive.
       #- "--batch"
       - "--local-user"
-      #- "{{ .Env.GPG_FINGERPRINT }}" # set this environment variable for your signing key
-      - "9A1E6CE7F48388C92872F35F567B0CA42DAB0F38"
+      - "{{ .Env.GPG_FINGERPRINT }}" # set this environment variable for your signing key
+      #- "C41849693EB646243843302B70B9B6D8DE032DD2"
       - "--output"
       - "${signature}"
       - "--detach-sign"
       - "${artifact}"
 release:
-  #extra_files:
-  #  - glob: 'terraform-registry-manifest.json'
-  #    name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
+  extra_files:
+    - glob: 'terraform-registry-manifest.json'
+      name_template: '{{ .ProjectName }}_{{ .Version }}_manifest.json'
   # If you want to manually examine the release before its live, uncomment this line:
   # draft: true
 changelog:
